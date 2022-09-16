@@ -21,8 +21,8 @@ COPY --from=build /app/goreportcard /usr/local/bin
 EXPOSE 8000
 
 # Run as non-root user
-RUN chmod 700 /usr/local/bin/app
-RUN chown infra:users /usr/local/bin/app
+RUN chmod 700 /usr/local/bin/goreportcard
+RUN chown infra:users /usr/local/bin/goreportcard
 
 USER user
 CMD ["goreportcard"]
