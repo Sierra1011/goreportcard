@@ -1,5 +1,5 @@
 # Build container
-FROM golang:1.19-alpine AS build
+FROM golang:alpine AS build
 
 # set Go envvars
 ENV GO111MODULE=on \
@@ -13,12 +13,16 @@ ADD ./src .
 RUN go build -o goreportcard
 
 # Deploy container
-FROM golang:1.19-alpine
+FROM golang:alpine
 RUN useradd -M user
 
-COPY --from=base /app/goreportcard /usr/local/bin
+COPY --from=build /app/goreportcard /usr/local/bin
 
 EXPOSE 8000
+
+# Run as non-root user
+RUN chmod 700 /usr/local/bin/app
+RUN chown infra:users /usr/local/bin/app
 
 USER user
 CMD ["goreportcard"]
