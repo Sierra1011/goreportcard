@@ -1,4 +1,4 @@
-FROM golang:1.16.3-alpine
+FROM golang:1.19
 
 RUN apk add --update --no-cache git make \
     && go get golang.org/x/tools/go/vcs
