@@ -49,22 +49,21 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       
-      - name: Get timestamp
-        run: |
-          echo timestamp="$(date +%s)" >> $GITHUB_ENV
+      #- name: Get timestamp
+      #  run: echo timestamp="$(date +%s)" >> $GITHUB_ENV
       
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ steps.login.outputs.registry }}/${{ github.ref_name }}
-          tags: |
-            type=sha,suffix=-${{ env.timestamp }}
+      #- name: Extract metadata (tags, labels) for Docker
+      #  id: meta
+      #  uses: docker/metadata-action@v4
+      #  with:
+      #    images: ${{ steps.login.outputs.registry }}/${{ github.ref_name }}
+      #    tags: |
+      #      type=sha,suffix=-${{ env.timestamp }}
       
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+          #labels: ${{ steps.meta.outputs.labels }}
