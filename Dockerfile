@@ -13,16 +13,18 @@ ADD ./src .
 RUN go build -o goreportcard
 
 # Deploy container
-FROM golang:alpine
+FROM golang:bullseye
 RUN useradd -M user
 
 COPY --from=build /app/goreportcard /usr/local/bin
+RUN mkdir /usr/local/badger
+RUN chown user:users /usr/local/badger
 
 EXPOSE 8000
 
 # Run as non-root user
 RUN chmod 700 /usr/local/bin/goreportcard
-RUN chown infra:users /usr/local/bin/goreportcard
+RUN chown user:users /usr/local/bin/goreportcard
 
 USER user
 CMD ["goreportcard"]
