@@ -4,16 +4,18 @@ name: Container image test
 
 on:
   schedule:
-    - cron: '*/4 * * * *'  # 2 minutes
+    - cron: '*/4 * * * *'
   workflow_dispatch:
-    
+  
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: sierra1011/goreportcard:latest 
-      ports:
-        - 8000
+    timeout-minutes: 15
+    services:
+      server:
+        image: sierra1011/goreportcard:latest 
+        ports:
+          - 80:8000
     steps:
       - name: Check curl response
-        run: curl localhost:8000
+        run: curl http://server:80
