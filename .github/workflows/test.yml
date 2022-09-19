@@ -5,7 +5,8 @@ name: Docker test
 on:
   schedule:
     - cron: '*/2 * * * *'  # 2 minutes
-
+  workflow_dispatch:
+    
 jobs:
   test:
     runs-on: ubuntu-latest
