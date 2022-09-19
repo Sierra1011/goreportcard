@@ -1,6 +1,6 @@
 concurrency: test-${{ github.ref }}
 
-name: Docker test
+name: Contaimer image test
 
 on:
   schedule:
