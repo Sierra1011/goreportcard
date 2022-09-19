@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     services:
-      server:
+      goreportcard:
         image: sierra1011/goreportcard:latest 
         ports:
           - 80:8000
     steps:
       - name: Check curl response
-        run: curl http://server:80
+        run: curl http://goreportcard:80
