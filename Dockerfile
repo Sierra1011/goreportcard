@@ -27,4 +27,5 @@ RUN chmod 700 /usr/local/bin/goreportcard
 RUN chown user:users /usr/local/bin/goreportcard
 
 USER user
+
 CMD ["goreportcard"]
