@@ -11,7 +11,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: docker pull sierra1011/goreportcard 
+      image: sierra1011/goreportcard:latest 
       ports:
         - 8000
     steps:
