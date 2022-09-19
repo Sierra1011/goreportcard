@@ -5,6 +5,10 @@ name: Docker build
 on:
   pull_request:
   push:
+    paths:
+      - ./src/**
+      - ./go.work
+      - ./Dockerfile
   workflow_dispatch:
 
 jobs:
