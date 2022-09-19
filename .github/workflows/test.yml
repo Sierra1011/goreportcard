@@ -1,0 +1,18 @@
+concurrency: test-${{ github.ref }}
+
+name: Docker test
+
+on:
+  schedule:
+    - cron: '*/2 * * * *'  # 2 minutes
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: docker pull sierra1011/goreportcard 
+      ports:
+        - 8000
+    steps:
+      - name: Check curl response
+        run: curl localhost:8000
